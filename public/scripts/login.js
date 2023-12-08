@@ -6,12 +6,40 @@ function newLogin(e) {
     e.preventDefault()
 
     let user = {
-        userName: document.getElementById("username").value,
+        username: document.getElementById("username").value,
         password: document.getElementById("password").value
     }
+
+    fetchData("/users/login", user, "POST")
+    .then(data => {
+      if(!data.message) {
+        window.location.href = "post.html"
+      }
+    })
+    .catch(err => {
+      let errorSection = document.querySelector("#loginForm .error")
+      errorSection.innerText = err.message
+      document.getElementById("username").value = ""
+      document.getElementById("password").value = ""
+    })
 
     let hello = document.getElementById("hello")
 
     hello.innerHTML = `Welcome back, ${user.userName}!`
     console.log(user.userName, user.password) //testing
 }
+
+async function fetchData(route = '', data = {}, methodType) {
+    const response = await fetch(`http://localhost:3000${route}`, {
+      method: methodType, // *POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data) 
+    });
+    if(response.ok) {
+      return await response.json(); 
+    } else {
+      throw await response.json();
+    }
+  } 
