@@ -1,6 +1,7 @@
 //Login Form
+import { fetchData, setCurrentUser } from "./main.js"
 let logForm = document.getElementById("loginForm")
-logForm.addEventListener('submit', newLogin)
+if(logForm) logForm.addEventListener('submit', newLogin)
 
 function newLogin(e) {
     e.preventDefault()
@@ -13,9 +14,13 @@ function newLogin(e) {
     fetchData("/users/login", user, "POST")
     .then(data => {
       if(!data.message) {
+        // add new user to local storage
+        console.log(data)
+        setCurrentUser(data)
         window.location.href = "post.html"
       }
     })
+
     .catch(err => {
       let errorSection = document.querySelector("#loginForm .error")
       errorSection.innerText = err.message
@@ -25,8 +30,8 @@ function newLogin(e) {
 
     let hello = document.getElementById("hello")
 
-    hello.innerHTML = `Welcome back, ${user.userName}!`
-    console.log(user.userName, user.password) //testing
+    hello.innerHTML = `Welcome back, ${user.username}!`
+    console.log(user.username, user.password) //testing
 }
 
 async function fetchData(route = '', data = {}, methodType) {
