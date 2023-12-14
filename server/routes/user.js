@@ -24,6 +24,7 @@ router.get('/getAllUsers', (req, res) => {
 //REGISTER
 .post('/register', async (req, res) => {
   try {
+    console.log(req.body)
     const user = await User.register(req.body)
     res.send({...user, password: undefined})
   } catch(err) {
@@ -50,5 +51,6 @@ router.get('/getAllUsers', (req, res) => {
     res.status(401).send({message: err.message})
   }
 })
+
 
 module.exports = router;
