@@ -15,7 +15,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/users', userRoutes)
+app.use(express.static(__dirname + "/public"))
+app.get('/', (req, res) => res.sendFile(path.join(__dirname + "/public/post.html")))
+
+app.use('/user', userRoutes)
 app.use('/post', postRoutes)
 // app.use for routes above
 
