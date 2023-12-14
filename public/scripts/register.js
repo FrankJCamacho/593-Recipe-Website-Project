@@ -1,7 +1,8 @@
 //Register Form
+import { fetchData, setCurrentUser } from "./main.js"
 
 let regForm = document.getElementById("registerForm")
-regForm.addEventListener('submit', newRegister)
+if(regForm) regForm.addEventListener('submit', newRegister)
 
 function newRegister(e) {
     e.preventDefault()
@@ -16,7 +17,8 @@ function newRegister(e) {
     fetchData("/user/register", user, "POST")
     .then(data => {
         if(!data.message) {
-            window.location.href = "post.html"
+            setCurrentUser(data)
+            window.location.href = "profile.html"
         }
     })
 
@@ -29,8 +31,5 @@ function newRegister(e) {
         document.getElementById("last").value = ""
     })
 
-    let h3 = document.getElementById("greetings")
-
-    h3.innerHTML = `Thank you for registering, ${user.userName}!`
-    console.log(user.firstName, user.lastName, user.userName, user.password) //testing
 }
+
