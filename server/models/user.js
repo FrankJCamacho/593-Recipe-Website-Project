@@ -1,18 +1,4 @@
-// const users = [
-//     {
-//       username: "cathy123",
-//       firstname: "Cathy",
-//       lastname: "Hoffman",
-//       password: "icecream"
-//     },
-//     {
-//         username: "bogginton",
-//         firstname: "Bog",
-//         lastname: "Sirree",
-//         password: "chezborger"
-//     }
-// ]
-  
+
 const con = require("./db_connect");
 
 async function createTable() {
@@ -54,7 +40,7 @@ async function register(user) {
   if(userResult.length > 0) throw Error("Username already in use!! Please pick a different one.")
 
   let sql = `
-    INSERT INTO user(username, password, first_name, last_name)
+    INSERT INTO user(username, user_password, first_name, last_name)
     VALUES("${user.username}", "${user.password}", "${user.first}", "${user.last}")
   `
 
