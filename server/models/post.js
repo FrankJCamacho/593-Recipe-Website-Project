@@ -1,18 +1,4 @@
-// const posts = [
-//     {
-//         title: "The Best Recipe!",
-//         steps: "1. Love, 2. Hope",
-//     },
-//     {
-//         title: "Chicken Sandwich",
-//         steps: "1.Chicken, 2. Bread",
-//     },
-//     {
-//         title: "Pizza",
-//         steps: "1. Order Online!",
-//     }
-//   ]
-  
+
   // CRUD functions
   let getPosts = () => posts;
   
@@ -62,7 +48,7 @@ async function readPost(post) {
   }
   
 // UPDATE - CRUD - U
-async function editPost(user) {
+async function editPost(post) {
     let updatedPost = await getPost(post.title)
     if(updatedPost.length > 0) throw Error("Post not available!")
   
