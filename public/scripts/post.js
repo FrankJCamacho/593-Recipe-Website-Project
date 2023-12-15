@@ -1,5 +1,6 @@
-import { fetchData, setPost } from "./main"
+import { fetchData, setPost } from "./main.js"
 
+let currentUser = getCurrentUser()
 //Post Form
 let postForm = document.getElementById("postForm")
 postForm.addEventListener('submit', newPost)
@@ -9,15 +10,20 @@ function newPost(e) {
 
     let post = {
         title: document.getElementById("title").value,
-        description: document.getElementById("text").value
+        description: document.getElementById("text").value,
+        user_id: currentUser.user_id
     }
 
-    fetchData("/post/createPost", post, "POST")
+    let recipes = document.getElementById("recipe")
+
+    fetchData("/post/create", post, "POST")
     .then(data => {
         if(!data.message) {
             console.log(data)
             setPost(data)
-            window.location.href = "post.html"
+            recipes.innerHTML+=`
+            <p>${data.post_title} | ${data.post_description}<p>`
+            // window.location.href = "post.html"
         }
     })
 
