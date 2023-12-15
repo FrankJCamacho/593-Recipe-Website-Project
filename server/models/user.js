@@ -29,7 +29,7 @@ let getUsers = () => users;
 async function login(user) {
   let userResult = await getUser(user.username)
   if(!userResult[0]) throw Error("Username not found!! Please try another.")
-  if(userResult[0].Password != user.password) throw Error("Password Incorrect!! Please try another.")
+  if(userResult[0].user_password  != user.password) throw Error("Password Incorrect!! Please try another.")
 
   return userResult[0]
 }
@@ -56,7 +56,7 @@ async function editUser(user) {
 
   let sql = `UPDATE user
     SET username = "${user.username}"
-    WHERE user_id= ${user.UserId}
+    WHERE user_id= ${user.user_id}
   `
   await con.query(sql)
   updatedUser = await getUser(user.username)
@@ -66,7 +66,7 @@ async function editUser(user) {
 // Delete User 
 async function deleteUser(user) {
   let sql = `DELETE FROM users
-    WHERE user_id = ${user.UserId}
+    WHERE user_id = ${user.user_id}
   `
   await con.query(sql)
 }
