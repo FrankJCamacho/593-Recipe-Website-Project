@@ -21,7 +21,7 @@ router.get('/getAllPosts', (req, res) => {
   }
 })
 
-//REGISTER
+//CREATE
 .post('/create', async (req, res) => {
   try {
     const post = await Post.createPost(req.body)
