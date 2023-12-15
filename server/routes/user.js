@@ -15,7 +15,7 @@ router.get('/getAllUsers', (req, res) => {
 .post('/login', async (req, res) => {
   try {
     const user = await User.login(req.body)
-    res.send({...user, password: undefined})
+    res.send({...user, user_password: undefined})
   } catch(err) {
     res.status(401).send({message: err.message})
   }
@@ -24,9 +24,8 @@ router.get('/getAllUsers', (req, res) => {
 //REGISTER
 .post('/register', async (req, res) => {
   try {
-    console.log(req.body)
     const user = await User.register(req.body)
-    res.send({...user, password: undefined})
+    res.send({...user, user_password: undefined})
   } catch(err) {
     res.status(401).send({message: err.message})
   }
@@ -36,7 +35,7 @@ router.get('/getAllUsers', (req, res) => {
 .put('/edit', async (req, res) => {
   try {
     let user = await User.editUser(req.body)
-    res.send({...user, password: undefined})
+    res.send({...user, user_password: undefined})
   } catch(err) {
     res.status(401).send({message: err.message})
   }
