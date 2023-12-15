@@ -24,6 +24,8 @@ function newPost(e) {
             recipes.innerHTML+=`
             <p>${data.post_title} | ${data.post_description}<p>`
             // window.location.href = "post.html"
+            document.getElementById("title").value = ""
+            document.getElementById("text").value = ""
         }
     })
 
