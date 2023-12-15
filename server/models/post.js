@@ -1,6 +1,6 @@
 
   // CRUD functions
-  let getPosts = () => posts;
+//  let getPosts = () => posts;
   
 //   function getPosts2() {
 //     return posts;
@@ -25,12 +25,12 @@ createTable()
 
 // CREATE - CRUD - C
 async function createPost(post) {
-    let postResult = await getUser(post.title)
+    let postResult = await getPost(post.title)
     if(postResult.length > 0) throw Error("Title already in use!! Please pick a different one.")
 
     let sql = `
-      INSERT INTO post(post_title, post_description)
-      VALUES("${post.title}", "${post.description}")
+      INSERT INTO post(post_title, post_description, user_id)
+      VALUES("${post.title}", "${post.description}", ${post.user_id})
     `
   
     await con.query(sql)
@@ -64,7 +64,7 @@ async function editPost(post) {
 // DELETE - CRUD - D
 async function deletePost(post) {
     let sql = `DELETE FROM post
-      WHERE post_id = ${post.PostId}
+      WHERE post_id = ${post.post_id}
     `
     await con.query(sql)
 }
