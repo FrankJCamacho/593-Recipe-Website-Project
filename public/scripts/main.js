@@ -2,20 +2,16 @@ let nav = document.querySelector("nav")
 
 if(getCurrentUser()) {
   nav.innerHTML = `
-     <ul>
-        <li><a href="post.html">Post</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a id="logout">Logout</li>
-      </ul>
+    <a href="post.html">Post</a></li>
+    <a href="profile.html">Profile</a></li>
+    <a id="logout">Logout</li>    
   `
 } else {
   nav.innerHTML = `
-     <ul>
-       <li><a href="post.html">Post</a></li>
-       <li><a href="profile.html">Profile</a></li>
-       <li><a href="login.html">Login</a></li>
-       <li><a href="register.html">Register</a></li>
-     </ul>
+    <a href="post.html">Post</a></li>
+    <a href="profile.html">Profile</a></li>
+    <a href="login.html">Login</a></li>
+    <a href="register.html">Register</a></li>
   `
 }
 
